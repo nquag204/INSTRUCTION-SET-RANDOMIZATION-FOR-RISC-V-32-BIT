@@ -8,15 +8,15 @@
 > **Institution:** Department of Electronics, Ho Chi Minh City University of Technology (HCMUT - VNU-HCM)  
 > **Supervisor:** Dr. Truong Quang Vinh  
 ---
-## 📌 1. Project Overview & Motivation
+##  1. Project Overview & Motivation
 Embedded systems and IoT edge devices are increasingly vulnerable to binary-level exploits, notably **Buffer Overflow**, **Code Injection**, and **Return-Oriented Programming (ROP)** attacks. These attacks exploit the static nature of standard Instruction Set Architectures (ISA).
 This repository implements a **Hardware-Assisted Instruction Set Randomization (ISR)** defense integrated directly into the pipeline of the open-source **lowRISC Ibex RISC-V Core (RV32IMC)**, deployed and verified on the **AMD/Xilinx Kria KV260 Vision AI Starter Kit**.
-### 🛡️ Core Security Concept:
+###  Core Security Concept:
 * **Pre-load Encryption (Software Toolchain):** The binary program is compiled, partitioned, and statically encrypted using a secret key before being loaded into memory.
 * **On-the-Fly Decryption (Hardware Pipeline):** A lightweight combinational hardware decoder in the **Instruction Fetch (IF)** stage decrypts instructions with **Zero-cycle Latency**.
 * **Active Defense (Attack Trapping):** Injected shellcode or code encrypted with an incorrect key fails to produce valid RISC-V opcodes, immediately triggering an **Illegal Instruction Exception (Trap)** and halting execution safely.
 ---
-## 🏗️ 2. System Architecture
+##  2. System Architecture
 ### 2.1. SoC-Level AXI Interconnect Topology
 The system models an asymmetric dual-core architecture: the **Zynq UltraScale+ PS** acts as the host manager, and the **Ibex RISC-V Core** acts as the secure target processor, communicating over a high-throughput **AXI4 Full Interconnect**.
 ```mermaid
@@ -46,7 +46,7 @@ graph TD
 The Ibex core uses the Open Bus Interface (OBI). An AXI Wrapper translates OBI transactions into two AXI4-Full Master interfaces (m_axi_instr and m_axi_data). The ISR Hardware Decoder is strategically placed on the instruction fetch datapath before the Prefetch Buffer.
 
 Mermaid diagram
-📊 3. Synthesis & Implementation Results (Post-Route on KV260)
+ 3. Synthesis & Implementation Results (Post-Route on KV260)
 The design was synthesized and implemented using AMD Xilinx Vivado 2023.1 targeting the Zynq UltraScale+ MPSoC (xck26-sfvc784-2LV-c).
 
 Resource Utilization:
@@ -59,14 +59,14 @@ Timing & Power Summary:
 Worst Negative Slack (WNS): +0.144 ns (Timing Met at 100 MHz).
 Total On-Chip Power: 2.797 W (Baseline: 2.818 W).
 Latency Overhead: 0 Clock Cycles (Combinational real-time XOR decoding).
-🔬 4. System Verification & Security Evaluation
+ 4. System Verification & Security Evaluation
 The system was evaluated across 3 testing scenarios via Verilator Simulation and Physical FPGA Execution:
 
 Test Group	Security Scenario	Encryption Key	Expected Behavior	Status
 Group 1: Baseline	Unmodified CPU, No ISR	N/A	Normal execution of ALU math, Fibonacci, Checksum.	PASS ✅
 Group 2: Golden Run	ISR Enabled, Valid Key	0xA1B2C3D4	Ciphertext in BRAM decoded transparently in real-time.	PASS ✅
 Group 3: Attack Scenario	Code Injection / Wrong Key	0x11223344 or Plaintext	Invalid opcodes trigger Illegal Instruction Trap; CPU safely halted; DECERR captured by ILA.	PASS 🛡️
-📂 5. Repository Directory Structure
+ 5. Repository Directory Structure
 text
 
 
@@ -89,7 +89,7 @@ text
     └── scripts/
         ├── create_project.tcl
         └── load_bram.tcl
-🚀 6. Quick Start & Deployment Guide
+ 6. Quick Start & Deployment Guide
 Step 1: Encrypt Application Binary
 Use the Python encoder to partition memory and encrypt the text segment:
 
@@ -116,7 +116,7 @@ tcl
 source vivado/scripts/load_bram.tcl
 Arm the System ILA trigger, then toggle VIO probe_out = 0 to release reset.
 Observe live AXI transactions and real-time instruction execution.
-📚 7. References
+ 7. References
 [1] G. S. Kc et al., "Countering code-injection attacks with instruction-set randomization," ACM CCS, 2003.
 [2] lowRISC, "Ibex RISC-V Core Reference Guide," lowRISC CIC, 2023.
 [3] ARM Ltd., "AMBA AXI and ACE Protocol Specification," 2011.
