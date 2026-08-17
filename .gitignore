@@ -1,0 +1,15 @@
+*.jou
+*.log
+*.dmp
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.str
+*.zip
+*.gen/
+*.srcs/
+__pycache__/
+*.py[cod]
