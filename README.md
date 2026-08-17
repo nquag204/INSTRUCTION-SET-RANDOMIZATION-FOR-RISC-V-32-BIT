@@ -11,18 +11,14 @@
 ### Quick Start & Deployment Guide
 Step 1: Encrypt Application Binary
 Use the Python encoder to partition memory and encrypt the text segment:
-
-bash
-
-
+```text
 python3 sw/isr_encoder.py -i sw/test_programs/test_input.vmem -o isr_test_encoded.vmem -k A1B2C3D4
+```
 Step 2: Load Bitstream on Kria KV260 (via MobaXterm / Linux PS)
 Transfer deployment files to KV260 and execute:
-
-bash
-
-
+```text
 sudo fpgautil -b kv260_deploy/ibex_wrapper.bit.bin -f Full
+```
 This command un-isolates the AXI fabric and initializes the PL clock domain.
 
 Step 3: Hardware Control & Debugging (via Vivado Hardware Manager)
