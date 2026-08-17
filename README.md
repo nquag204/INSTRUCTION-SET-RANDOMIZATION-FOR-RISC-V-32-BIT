@@ -22,13 +22,12 @@ sudo fpgautil -b kv260_deploy/ibex_wrapper.bit.bin -f Full
 This command un-isolates the AXI fabric and initializes the PL clock domain.
 
 Step 3: Hardware Control & Debugging (via Vivado Hardware Manager)
-Open Vivado Hardware Manager and connect to the target board.
-In Virtual I/O (VIO), set probe_out = 1 to hold the Ibex core in reset.
-In Vivado Tcl Console, load the encrypted instructions directly to BRAM:
-tcl
-
-
+1. Open Vivado Hardware Manager and connect to the target board.
+2. In Virtual I/O (VIO), set probe_out = 1 to hold the Ibex core in reset.
+3. In Vivado Tcl Console, load the encrypted instructions directly to BRAM:
+```text
 source vivado/scripts/load_bram.tcl
-Arm the System ILA trigger, then toggle VIO probe_out = 0 to release reset.
-Observe live AXI transactions and real-time instruction execution.
+```
+4. Arm the System ILA trigger, then toggle VIO probe_out = 0 to release reset.
+5. Observe live AXI transactions and real-time instruction execution.
 © 2026 Department of Electronics, Ho Chi Minh City University of Technology (HCMUT).
