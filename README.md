@@ -8,7 +8,7 @@
 > **Institution:** Department of Electronics, Ho Chi Minh City University of Technology (HCMUT - VNU-HCM)  
 > **Supervisor:** Dr. Truong Quang Vinh  
 ---
-Quick Start & Deployment Guide
+### Quick Start & Deployment Guide
 Step 1: Encrypt Application Binary
 Use the Python encoder to partition memory and encrypt the text segment:
 
