@@ -45,7 +45,7 @@ graph TD
 2.2. Ibex AXI Wrapper & ISR Microarchitecture
 The Ibex core uses the Open Bus Interface (OBI). An AXI Wrapper translates OBI transactions into two AXI4-Full Master interfaces (m_axi_instr and m_axi_data). The ISR Hardware Decoder is strategically placed on the instruction fetch datapath before the Prefetch Buffer.
 
-Mermaid diagram
+
  3. Synthesis & Implementation Results (Post-Route on KV260)
 The design was synthesized and implemented using AMD Xilinx Vivado 2023.1 targeting the Zynq UltraScale+ MPSoC (xck26-sfvc784-2LV-c).
 
